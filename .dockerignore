@@ -1,0 +1,11 @@
+.venv
+venv
+.git
+.env
+secrets
+logs/*
+terraform
+.pytest_cache
+.ruff_cache
+__pycache__
+*.zip

@@ -1,0 +1,23 @@
+[project]
+name = "helpdesk-faq-bot"
+version = "0.1.0"
+description = "Slack IT helpdesk FAQ bot: keyword rules + RAG fallback, with Prometheus/Grafana observability"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Paul Kosal" }]
+requires-python = ">=3.11"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]

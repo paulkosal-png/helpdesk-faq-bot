@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  lint-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements-dev.txt
+      - name: Install dependencies
+        run: pip install -r requirements-dev.txt
+      - name: Ruff lint
+        run: ruff check . --output-format=github
+      - name: Ruff format check
+        run: ruff format --check .
+      - name: Validate sample FAQ rules
+        run: PYTHONPATH=src python -m helpdesk_faq_bot check
+      - name: Pytest
+        run: pytest -q
+
+  docker:
+    runs-on: ubuntu-latest
+    needs: lint-test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - name: Build image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: false
+          load: true
+          tags: helpdesk-faq-bot:ci
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - name: Smoke test (CLI demo inside the container, no Slack)
+        run: docker run --rm helpdesk-faq-bot:ci demo

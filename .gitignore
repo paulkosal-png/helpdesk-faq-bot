@@ -1,0 +1,39 @@
+# secrets - never commit
+.env
+*.env
+!.env.example
+secrets/
+*service-account*.json
+*credentials*.json
+*.pem
+*.key
+
+# python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
+
+# runtime
+logs/*
+!logs/.gitkeep
+.cache/
+models/
+
+# terraform
+terraform/.terraform/
+terraform/*.tfstate*
+terraform/*.tfvars
+!terraform/terraform.tfvars.example
+terraform/.terraform.lock.hcl
+
+# os/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

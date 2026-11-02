@@ -1,0 +1,6 @@
+project_id      = "my-personal-gcp-project"
+region          = "us-west1"
+image_tag       = "v0.1.0"
+google_sheet_id = ""   # optional
+llm_base_url    = ""   # optional, e.g. https://api.openai.com/v1
+llm_model       = ""   # optional, e.g. gpt-4o-mini

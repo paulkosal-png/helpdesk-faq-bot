@@ -1,0 +1,4 @@
+# Optional: local semantic embeddings (EMBEDDING_BACKEND=sentence-transformers).
+# Pulls in PyTorch (~1-2 GB). Not needed for the default offline "hashing" embedder or an API embedder.
+-r requirements.txt
+sentence-transformers>=3.0

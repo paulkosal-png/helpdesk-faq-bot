@@ -1,0 +1,30 @@
+# Create the app at https://api.slack.com/apps -> Create New App -> From a manifest.
+# Use a PERSONAL test workspace, never your employer's.
+display_information:
+  name: Helpdesk FAQ Bot
+  description: Answers common IT questions from an FAQ sheet, with an AI fallback.
+  background_color: "#2c3e50"
+features:
+  app_home:
+    home_tab_enabled: false
+    messages_tab_enabled: true
+    messages_tab_read_only_enabled: false   # without this, users can't type in the bot's DM
+  bot_user:
+    display_name: helpdesk-bot
+    always_online: true
+oauth_config:
+  scopes:
+    bot:
+      - app_mentions:read   # @helpdesk-bot in channels
+      - chat:write          # reply
+      - im:history          # read DMs sent to the bot
+settings:
+  event_subscriptions:
+    bot_events:
+      - app_mention
+      - message.im
+  interactivity:
+    is_enabled: true        # FAQ choice buttons / dropdown
+  org_deploy_enabled: false
+  socket_mode_enabled: true # no public URL needed
+  token_rotation_enabled: false

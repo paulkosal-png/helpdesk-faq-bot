@@ -1,0 +1,9 @@
+# Core runtime
+slack-bolt>=1.21,<2
+prometheus-client>=0.20
+numpy>=1.26
+requests>=2.31
+python-dotenv>=1.0
+# Google Sheets FAQ source (service account)
+gspread>=6.0
+google-auth>=2.29
