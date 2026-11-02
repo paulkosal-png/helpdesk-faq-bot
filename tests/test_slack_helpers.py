@@ -1,3 +1,5 @@
+import time
+
 from helpdesk_faq_bot.models import BotAnswer, FAQEntry, Source
 from helpdesk_faq_bot.slack_app import PendingChoice, PendingStore, choice_blocks, clean_text, format_answer
 
@@ -29,7 +31,7 @@ def test_only_requester_can_pick_and_only_once():
 
 def test_expired_choice(monkeypatch):
     store = PendingStore()
-    key = store.add(PendingChoice(user="U1", question="q", options=["A"], channel="D1", created=0.0))
+    key = store.add(PendingChoice(user="U1", question="q", options=["A"], channel="D1", created=time.monotonic() - 16 * 60))
     choice, err = store.claim(key, "U1")
     assert choice is None and "expired" in err
 
